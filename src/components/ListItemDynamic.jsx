@@ -4,19 +4,19 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import TimelineIcon from '@material-ui/icons/Timeline';
-import DeleteIcon from '@material-ui/icons/Delete';
+import icon from '../constants/icons';
+
 class ListItemDynamic extends Component {
     render() { 
         return ( 
-            <ListItem button>
+            <ListItem>
                 <ListItemIcon>
-                    <TimelineIcon />
+                    <icon.chart />
                 </ListItemIcon>
                 <ListItemText primary={this.props.name}/>
-                <ListItemSecondaryAction hidden={!this.props.open}>
-                    <IconButton edge="end">
-                      <DeleteIcon />
+                <ListItemSecondaryAction hidden={!(this.props.open) || (this.props.inTransit)}>
+                    <IconButton edge="end" onClick={()=>{this.props.deleteChart(this.props.name)}}>
+                      <icon.chartdelete />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

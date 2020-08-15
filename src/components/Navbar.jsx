@@ -8,26 +8,18 @@ import ListItemHeader from './ListItemHeader';
 import ListItemPermanent from './ListItemPermanent';
 import ListItemDynamic from './ListItemDynamic';
 import ListItemAdd from './ListItemAdd';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+
 
 class NavBar extends Component {
     state = {
         open: true,
-        permanentItems:[
-            {name:"Config",icon:SettingsIcon},
-            {name:"Symbol",icon:AssignmentIcon},
-            {name:"Date Range",icon:DateRangeIcon}
-        ],
-        dynamicItems:[
-            {name:"Chart 1"},
-            {name:"Chart 2"},
-            {name:"Chart 3"}
-        ]
+        inTransit:false
     };
     handleDrawerToggle = () => {
-        this.setState({ open: !this.state.open });
+        this.setState({ open: !this.state.open , inTransit:true });
+        setTimeout(()=>{
+            this.setState({inTransit:false})
+        },500)
     };
     render() {
         const { classes } = this.props;
@@ -46,14 +38,14 @@ class NavBar extends Component {
             >
                 <ListItemHeader onClick={this.handleDrawerToggle} open={this.state.open}/>
                 <Divider />
-                {this.state.permanentItems.map((item)=>{
+                {this.props.state.permanentItems.map((item)=>{
                     return (<ListItemPermanent name={item.name} icon={item.icon} open={this.state.open} key={item.name}/>)
                 })}
                 <Divider />
-                {this.state.dynamicItems.map((item)=>{
-                    return (<ListItemDynamic name={item.name} open={this.state.open} key={item.name}/>)
+                {this.props.state.dynamicItems.map((item)=>{
+                    return (<ListItemDynamic name={item.name} open={this.state.open} inTransit={this.state.inTransit} deleteChart={this.props.deleteChart} key={item.name}/>)
                 })}
-                <ListItemAdd/>
+                <ListItemAdd onClick={this.props.addChart}/>
                 <Divider />
             </Drawer>
         );

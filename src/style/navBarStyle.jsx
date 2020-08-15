@@ -1,11 +1,7 @@
 const drawerWidth = 300;
 const styles = (theme) => ({
-    root: {
-        display: "flex"
-    },
     drawer: {
         width: drawerWidth,
-        flexShrink: 0,
         whiteSpace: "nowrap"
     },
     drawerOpen: {
@@ -23,7 +19,7 @@ const styles = (theme) => ({
         overflowX: "hidden",
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up("sm")]: {
-            width: theme.spacing(9) + 1
+            width: theme.spacing(7) + 1
         }
     }
 });
