@@ -5,6 +5,10 @@ import Home from './components/Home';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import icon from './constants/icons';
 import * as _ from "lodash";
+import color from './constants/palette';
+// import styles from "./style/bodyStyle";
+// import classNames from "classnames";
+// import { withStyles } from "@material-ui/core/styles";
 
 class App extends Component {
 
@@ -49,11 +53,12 @@ class App extends Component {
   }
 
   render() {
+    // const { classes } = this.props;
     return (
-      <div className="App">
+      <div className="Full">
         <CssBaseline/>
-        <Box display="flex" flexDirection="row" >
-          <Box>
+        <Box className="Full" display="flex" flexDirection="row" bgcolor={color.background}>
+          <Box >
             <NavBar state={this.state} addChart={this.addChart} deleteChart={this.deleteChart}/>
           </Box>
           <Box flexGrow={1}>
@@ -66,4 +71,4 @@ class App extends Component {
   
 }
 
-export default App;
+export default (App);

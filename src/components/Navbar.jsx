@@ -9,7 +9,6 @@ import ListItemPermanent from './ListItemPermanent';
 import ListItemDynamic from './ListItemDynamic';
 import ListItemAdd from './ListItemAdd';
 
-
 class NavBar extends Component {
     state = {
         open: true,
@@ -25,28 +24,32 @@ class NavBar extends Component {
         const { classes } = this.props;
         return (
             <Drawer variant="permanent" open={this.state.open} 
-              className={classNames(classes.drawer, {
+              className={classNames(classes.drawer,
+                // classes.darkBackground, 
+                {
                 [classes.drawerOpen]: this.state.open,
-                [classes.drawerClose]: !this.state.open
+                [classes.drawerClose]: !this.state.open,
               })}
               classes={{
-                paper: classNames({
+                paper: classNames(
+                  classes.darkBackground,
+                  {
                   [classes.drawerOpen]: this.state.open,
                   [classes.drawerClose]: !this.state.open
-                })
+                  })
               }}
             >
                 <ListItemHeader onClick={this.handleDrawerToggle} open={this.state.open}/>
-                <Divider />
+                <Divider className={classes.divider}/>
                 {this.props.state.permanentItems.map((item)=>{
                     return (<ListItemPermanent name={item.name} icon={item.icon} open={this.state.open} key={item.name}/>)
                 })}
-                <Divider />
+                <Divider className={classes.divider}/>
                 {this.props.state.dynamicItems.map((item)=>{
                     return (<ListItemDynamic name={item.name} open={this.state.open} inTransit={this.state.inTransit} deleteChart={this.props.deleteChart} key={item.name}/>)
                 })}
                 <ListItemAdd onClick={this.props.addChart}/>
-                <Divider />
+                <Divider className={classes.divider}/>
             </Drawer>
         );
       }

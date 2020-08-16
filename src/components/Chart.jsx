@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { LineChart, Line, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import styles from '../style/bodyStyle';
+import { LineChart, Line, Tooltip, XAxis, ResponsiveContainer , Label} from 'recharts';
 const data = [{name: 'Page A', data: 400},{name: 'Page A', data: 245},{name: 'Page A', data: 466},{name: 'Page A', data: 123},{name: 'Page A', data: 400},{name: 'Page A', data: 245},{name: 'Page A', data: 466},{name: 'Page A', data: 123},{name: 'Page A', data: 400},{name: 'Page A', data: 245},{name: 'Page A', data: 466},{name: 'Page A', data: 123},{name: 'Page A', data: 400},{name: 'Page A', data: 245},{name: 'Page A', data: 466},{name: 'Page A', data: 123} ];
 
 
 class Chart extends Component {
     render() { 
+        const { classes } = this.props;
         return ( 
-            <Box m={2} width="auto">
-                <Card>
-                    <CardMedia>
-                        <ResponsiveContainer width="100%" height={200}>
-                            <LineChart data={data}>
-                                <Line type="monotone" dataKey="data" stroke="#000000" />
-                                <XAxis/>
-                                <YAxis/>
+            <Box m={2} mb={0} width="auto">
+                <Card className={classNames(classes.chart)}>
+                    <ResponsiveContainer width="99%" height={200}>
+                            <LineChart  data={data} margin={{right: 16, left: 24, top:16 ,bottom:16}}>
+                                <Line isAnimationActive={false} type="monotone" dataKey="data" stroke="#000000" />
+                                <XAxis>
+                                    <Label value="Name" offset={0} position="insideBottomLeft" />
+                                </XAxis>
                                 <Tooltip />
                             </LineChart>
-                        </ResponsiveContainer>
-                    </CardMedia>
-                    <CardContent>
-                        <Typography color="textPrimary">
-                            {this.props.name}
-                        </Typography>
-                    </CardContent>
+                    </ResponsiveContainer>
                 </Card>
             </Box>
          );
     }
 }
  
-export default Chart;
+export default withStyles(styles)(Chart);
