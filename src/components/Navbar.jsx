@@ -52,4 +52,4 @@ class NavBar extends Component {
       }
 }
  
-export default withStyles(styles, { withTheme: true })(NavBar);;
+export default withStyles(styles, { withTheme: true })(NavBar);
